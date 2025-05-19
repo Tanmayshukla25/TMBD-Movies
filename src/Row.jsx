@@ -26,13 +26,13 @@ function Row({ urls, heading, btn1, btn2 }) {
         <h2 className="text-xl font-bold mb-4">{heading}</h2>
         <div className="mb-4">
           <button
-            className="bg-blue-500  px-4 py-2 mr-2 rounded"
+            className="  px-4 py-2 mr-2 rounded"
             onClick={() => setShowData(urls[0])}
           >
             {btn1}
           </button>
           <button
-            className="bg-green-500 px-4 py-2 rounded"
+            className=" px-4 py-2 rounded"
             onClick={() => setShowData(urls[1])}
           >
             {btn2}
