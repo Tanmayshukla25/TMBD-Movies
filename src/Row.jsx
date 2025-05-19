@@ -35,18 +35,18 @@ function Row({ urls, heading, btn1, btn2 }) {
     <section className="px-8">
       <header className="flex justify-between items-center my-2">
         <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
-         <div className="bg-white h-15 rounded-4xl px-2">
+         <div className="bg-white  rounded-4xl py-1 px-3">
       <button
-        className={`px-4 py-2 mr-2 rounded cursor-pointer ml-3 ${
-          activeBtn === 0 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white " : "bg-white"
+        className={` rounded cursor-pointer mr-2 ${
+          activeBtn === 0 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white " : " "
         }`}
         onClick={() => handleClick(0)}
       >
         {btn1}
       </button>
       <button
-        className={`px-4 py-2 rounded cursor-pointer mt-3 ${
-          activeBtn === 1 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white" : "bg-white"
+        className={` rounded cursor-pointer  ${
+          activeBtn === 1 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white" : " "
         }`}
         onClick={() => handleClick(1)}
       >
