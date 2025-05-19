@@ -3,12 +3,12 @@ import Row from "./Row";
 import { urls } from "./data";
 import "./App.css"
 
+import Header from "./header.Jsx";
+
 function App() {
   return (
     <>
-      {/* <TrendingByDay />
-      <Popular />
-      <TopMovies /> */}
+     <Header />
 
       <Row
         heading="Trending Movies"

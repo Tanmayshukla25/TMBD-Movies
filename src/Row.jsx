@@ -3,8 +3,9 @@ import { useEffect, useState } from "react";
 function Row({ urls, heading, btn1, btn2 }) {
   const [movieData, setMovieData] = useState([]);
   const [showData, setShowData] = useState(urls[0]);
+    const [activeBtn, setActiveBtn] = useState(0);
 
-  const baseImageUrl = "https://image.tmdb.org/t/p/w500";
+ const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
     async function fetchMovies() {
@@ -20,43 +21,71 @@ function Row({ urls, heading, btn1, btn2 }) {
     fetchMovies();
   }, [showData]);
 
+    const handleClick = (index) => {
+    setActiveBtn(index);
+    setShowData(urls[index]);
+  };
+
+
+  function trimContent(content) {
+    return content.length > 20 ? content.slice(0, 20) + "..." : content;
+  }
+
   return (
-    <section>
-      <header>
-        <h2 className="text-xl font-bold m-4">{heading}</h2>
-        <div className="mb-4">
-          <button
-            className="  px-4 py-2 mr-2 rounded bg-white cursor-pointer ml-3"
-            onClick={() => setShowData(urls[0])}
-          >
-            {btn1}
-          </button>
-          <button
-            className=" px-4 py-2 rounded bg-white cursor-pointer mt-3"
-            onClick={() => setShowData(urls[1])}
-          >
-            {btn2}
-          </button>
-        </div>  
-        <div className="flex flex-wrap justify-center gap-5 p-6">
-          {movieData.length > 0 ? (
-            movieData.map((item) => (
-              <div key={item.id} className="text-center ">
-             
-                {item.poster_path && (
-                  <img
-                    className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
-                    src={`${baseImageUrl}${item.poster_path}`}
-                    alt={item.title || item.name}
-                  />
-                )}
-              </div>
-            ))
-          ) : (
-            <p>No Data To Show Yet!</p>
-          )}
-        </div>
+    <section className="px-8">
+      <header className="flex justify-between items-center my-2">
+        <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
+         <div className="bg-white h-15 rounded-4xl px-2">
+      <button
+        className={`px-4 py-2 mr-2 rounded cursor-pointer ml-3 ${
+          activeBtn === 0 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white " : "bg-white"
+        }`}
+        onClick={() => handleClick(0)}
+      >
+        {btn1}
+      </button>
+      <button
+        className={`px-4 py-2 rounded cursor-pointer mt-3 ${
+          activeBtn === 1 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white" : "bg-white"
+        }`}
+        onClick={() => handleClick(1)}
+      >
+        {btn2}
+      </button>
+    </div>
       </header>
+
+      <div className="grid grid-flow-col gap-1 overflow-x-scroll  py-2 scrollbar-hide">
+        {movieData.length > 0 ? (
+          movieData.map((item) => (
+            <div key={item.id} className="text-center">
+              {item.poster_path && (
+                <img
+                  className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
+                  src={`${baseImageUrl}${item.poster_path}`}
+                  alt={item.title || item.name}
+                />
+              )}
+              <div className="content text-white">
+                <h3 className="font-semibold text-xl mb-2">
+                  {trimContent(item.title || item.name)}
+                </h3>
+                <p>
+                  {item.release_date
+                    ? new Date(item.release_date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "2-digit",
+                      })
+                    : ""}
+                </p>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p className="text-white">No Data To Show Yet!</p>
+        )}
+      </div>
     </section>
   );
 }

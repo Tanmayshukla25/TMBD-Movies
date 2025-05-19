@@ -1,5 +1,16 @@
 @import "tailwindcss";
 
 body{
-    background-color: grey;
+    background-color: #04152d;
+}
+.scrollbar-hide{
+    scrollbar-width: none;
+    grid-auto-columns: 15%;
+    scroll-snap-type: x mandatory;
+    >div{
+        scroll-snap-align: center;
+    }
+}
+.scrollbar-hide::-webkit-scrollbar{
+    display: none;
 }
