@@ -23,29 +23,29 @@ function Row({ urls, heading, btn1, btn2 }) {
   return (
     <section>
       <header>
-        <h2 className="text-xl font-bold mb-4">{heading}</h2>
+        <h2 className="text-xl font-bold m-4">{heading}</h2>
         <div className="mb-4">
           <button
-            className="  px-4 py-2 mr-2 rounded"
+            className="  px-4 py-2 mr-2 rounded bg-white cursor-pointer ml-3"
             onClick={() => setShowData(urls[0])}
           >
             {btn1}
           </button>
           <button
-            className=" px-4 py-2 rounded"
+            className=" px-4 py-2 rounded bg-white cursor-pointer mt-3"
             onClick={() => setShowData(urls[1])}
           >
             {btn2}
           </button>
-        </div>
+        </div>  
         <div className="flex flex-wrap justify-center gap-5 p-6">
           {movieData.length > 0 ? (
             movieData.map((item) => (
-              <div key={item.id} className="text-center w-[100px]">
+              <div key={item.id} className="text-center ">
              
                 {item.poster_path && (
                   <img
-                    className="rounded-md mb-2 w-[100px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
+                    className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
                     src={`${baseImageUrl}${item.poster_path}`}
                     alt={item.title || item.name}
                   />

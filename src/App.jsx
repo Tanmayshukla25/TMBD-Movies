@@ -1,6 +1,7 @@
 
 import Row from "./Row";
 import { urls } from "./data";
+import "./App.css"
 
 function App() {
   return (
