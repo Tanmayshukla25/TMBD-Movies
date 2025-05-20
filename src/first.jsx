@@ -1,3 +1,4 @@
+import Footer from "./footer";
 import MainHeader from "./MainHeader";
 
 import { Outlet } from "react-router-dom";
@@ -7,6 +8,7 @@ function First() {
     <>
      <MainHeader/>
       <Outlet />
+      <Footer />
   
     </>
   );
