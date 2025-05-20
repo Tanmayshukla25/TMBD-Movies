@@ -4,10 +4,12 @@ import { urls } from "./data";
 import "./App.css"
 
 import Header from "./header.Jsx";
+import MainHeader from "./MainHeader";
 
 function App() {
   return (
     <>
+    <MainHeader/>
      <Header />
 
       <Row

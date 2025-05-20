@@ -3,9 +3,9 @@ import { useEffect, useState } from "react";
 function Row({ urls, heading, btn1, btn2 }) {
   const [movieData, setMovieData] = useState([]);
   const [showData, setShowData] = useState(urls[0]);
-    const [activeBtn, setActiveBtn] = useState(0);
+  const [activeBtn, setActiveBtn] = useState(0);
 
- const baseImageUrl = "https://image.tmdb.org/t/p/original";
+  const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
   useEffect(() => {
     async function fetchMovies() {
@@ -21,11 +21,10 @@ function Row({ urls, heading, btn1, btn2 }) {
     fetchMovies();
   }, [showData]);
 
-    const handleClick = (index) => {
+  const handleClick = (index) => {
     setActiveBtn(index);
     setShowData(urls[index]);
   };
-
 
   function trimContent(content) {
     return content.length > 20 ? content.slice(0, 20) + "..." : content;
@@ -35,24 +34,28 @@ function Row({ urls, heading, btn1, btn2 }) {
     <section className="px-8">
       <header className="flex justify-between items-center my-2">
         <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
-         <div className="bg-white  rounded-4xl py-1 px-3">
-      <button
-        className={` rounded cursor-pointer mr-2 ${
-          activeBtn === 0 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white " : " "
-        }`}
-        onClick={() => handleClick(0)}
-      >
-        {btn1}
-      </button>
-      <button
-        className={` rounded cursor-pointer  ${
-          activeBtn === 1 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white" : " "
-        }`}
-        onClick={() => handleClick(1)}
-      >
-        {btn2}
-      </button>
-    </div>
+        <div className="bg-white  rounded-4xl py-1 px-3">
+          <button
+            className={` rounded cursor-pointer mr-2 ${
+              activeBtn === 0
+                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white "
+                : " "
+            }`}
+            onClick={() => handleClick(0)}
+          >
+            {btn1}
+          </button>
+          <button
+            className={` rounded cursor-pointer  ${
+              activeBtn === 1
+                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white"
+                : " "
+            }`}
+            onClick={() => handleClick(1)}
+          >
+            {btn2}
+          </button>
+        </div>
       </header>
 
       <div className="grid grid-flow-col gap-1 overflow-x-scroll  py-2 scrollbar-hide">
