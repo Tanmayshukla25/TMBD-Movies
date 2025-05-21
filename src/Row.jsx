@@ -75,7 +75,7 @@ function Row({ urls, heading, btn1, btn2 }) {
               {item.poster_path && (
                 <img
                   onClick={() => handleShowImage(item)} 
-                  className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
+                  className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
                   src={`${baseImageUrl}${item.poster_path}`}
                   alt={item.title || item.name}
                 />

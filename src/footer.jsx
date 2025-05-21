@@ -7,7 +7,7 @@ function Footer() {
     return(
         <>
 
-      <div className="flex items-center justify-center mt-[20px] bg-cyan-950 p-10">
+      <div className="flex items-center justify-center bg-cyan-950 p-10">
           <div className="text-center text-white">
             <ul className="flex items-center justify-center gap-8 text-xl">
                 <li><h1>Terms of Use</h1></li>
