@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import App from "./App";
-import Row from "./Row";
 import First from "./first";
+import Movie from "./Movie";
 
 
 const router = createBrowserRouter([
@@ -9,7 +9,8 @@ const router = createBrowserRouter([
     path: "/",
     element: <First/>,
      children: [
-      { index: true, element: <App /> }
+      { index: true, element: <App /> },
+      { path: "/movie", element:<Movie/> },
   
     ],
   },

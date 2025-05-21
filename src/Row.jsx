@@ -1,11 +1,19 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function Row({ urls, heading, btn1, btn2 }) {
   const [movieData, setMovieData] = useState([]);
   const [showData, setShowData] = useState(urls[0]);
   const [activeBtn, setActiveBtn] = useState(0);
+  
+  
+  const navigate = useNavigate();
 
   const baseImageUrl = "https://image.tmdb.org/t/p/original";
+
+  function handleShowImage() {
+    navigate("/movie")
+  }
 
   useEffect(() => {
     async function fetchMovies() {
@@ -64,6 +72,7 @@ function Row({ urls, heading, btn1, btn2 }) {
             <div key={item.id} className="text-center">
               {item.poster_path && (
                 <img
+                  onClick={handleShowImage}
                   className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)]"
                   src={`${baseImageUrl}${item.poster_path}`}
                   alt={item.title || item.name}
