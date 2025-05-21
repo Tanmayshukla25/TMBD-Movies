@@ -4,6 +4,10 @@
     {
       "source": "/source-path",
       "destination": "/destination-path"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
   ]
 }
