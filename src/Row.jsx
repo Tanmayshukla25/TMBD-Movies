@@ -13,7 +13,7 @@ function Row({ urls, heading, btn1, btn2 }) {
   const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
  function handleShowImage(item) {
-  navigate("/movie", { state: { item } });
+  navigate(`/movie/${item.id}`, { state: { item } });
 }
 
 

@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 
+
 const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
 function Movie() {
@@ -7,6 +8,7 @@ function Movie() {
   const { item } = state || {};
   console.log(item);
   
+
 
   if (!item) {
     return <p className="text-white">No movie data found.</p>;
@@ -32,6 +34,7 @@ function Movie() {
      </div>
      <div>
        <h1 className="text-2xl font-bold mt-4">{item.title || item.name}</h1>
+  
        <p>{item.subtitle}</p>
       <p className="mt-2  w-[500px] py-4"><span className="text-4xl font-bold pb-[20px]">OverView</span> <br />{item.overview}</p>
     <span className="text-xl font-bold">Release Date :- <span className="text-gray-500 text-[15px] font-medium"> {item.release_date}</span></span>
