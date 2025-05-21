@@ -5,8 +5,9 @@
       "source": "/source-path",
       "destination": "/destination-path"
     },
+   
     {
-      "source": "/((?!source-path).*)",
+      "source": "/(.*)",
       "destination": "/index.html"
     }
   ]
