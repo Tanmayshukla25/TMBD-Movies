@@ -3,7 +3,7 @@ import Row from "./Row";
 import { urls } from "./data";
 import "./App.css"
 
-import Header from "./header.Jsx";
+import Header from "./header.jsx";
 import MainHeader from "./MainHeader";
 
 function App() {
