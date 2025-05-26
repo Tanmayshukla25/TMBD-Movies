@@ -41,14 +41,14 @@ function Row({ urls, heading, btn1, btn2 }) {
   }
 
   return (
-    <section className="px-8">
+    <section className="px-8 mt-10 mb-10">
       <header className="flex justify-between items-center my-2">
         <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
-        <div className="bg-white  rounded-4xl py-1 px-3">
+        <div className="bg-white  rounded-4xl py-1 px-1 md:px-3">
           <button
-            className={` rounded cursor-pointer mr-2 ${
+            className={` rounded cursor-pointer mr-2  ${
               activeBtn === 0
-                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white "
+                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-1 md:px-4 text-white "
                 : " "
             }`}
             onClick={() => handleClick(0)}
@@ -58,7 +58,7 @@ function Row({ urls, heading, btn1, btn2 }) {
           <button
             className={` rounded cursor-pointer  ${
               activeBtn === 1
-                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-4 text-white"
+                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-1 md:px-4 text-white"
                 : " "
             }`}
             onClick={() => handleClick(1)}
@@ -68,23 +68,23 @@ function Row({ urls, heading, btn1, btn2 }) {
         </div>
       </header>
 
-      <div className="grid grid-flow-col gap-1 overflow-x-scroll  py-2 scrollbar-hide">
+      <div className="grid grid-flow-col gap-1 overflow-x-scroll   py-2 scrollbar-hide">
         {movieData.length > 0 ? (
           movieData.map((item) => (
             <div key={item.id} className="text-center">
               {item.poster_path && (
                 <img
                   onClick={() => handleShowImage(item)} 
-                  className="rounded-md mb-2 w-[200px] h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
+                  className="rounded-md mb-2 w-[200px] h-[100px] md:h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
                   src={`${baseImageUrl}${item.poster_path}`}
                   alt={item.title || item.name}
                 />
               )}
               <div className="content text-white">
-                <h3 className="font-semibold text-xl mb-2">
+                <h3 className="font-semibold text-[10px] md:text-xl mb-2">
                   {trimContent(item.title || item.name)}
                 </h3>
-                <p>
+                <p className="text-[7px] md:text-xl">
                   {item.release_date
                     ? new Date(item.release_date).toLocaleDateString("en-US", {
                         year: "numeric",

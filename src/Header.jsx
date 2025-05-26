@@ -34,7 +34,7 @@ function Header() {
   }
 
   return (
-    <div className="relative">
+    <div className="">
   
 
       {randomBackdrop && (
@@ -48,12 +48,14 @@ function Header() {
           
         >
          
-         <div className="absolute top-[35%] left-[28%]">
-           <div >
-            <h1 className="text-white text-center text-7xl font-extrabold">Welcome.</h1>
-            <p className="text-white text-2xl m-5">Millions of movies, TV shows and people to discover. Explore now.</p>
-            <input type="text "className="bg-white w-[580px] rounded-l-[30px] px-[20px] py-[18px]" placeholder="Search for a movie or tv Show...." />
-            <button className="px-[20px] py-[18px] w-[150px] text-white rounded-r-[30px] bg-gradient-to-r from-orange-400 to-pink-600 shadow-md">Search</button>
+         <div className="">
+           <div className="grid place-content-center h-screen">
+            <h1 className="text-white text-center text-3xl md:text-7xl font-extrabold">Welcome.</h1>
+            <p className="text-white text-[12px] md:text-2xl m-2 md:m-5 text-center">Millions of movies, TV shows and people to discover. Explore now.</p>
+        <div className="flex items-center justify-center">
+              <input type="text "className="bg-white w-[270px] md:w-[580px] rounded-l-[30px] px-[10px] py-[5px]  md:py-[18px] " placeholder="Search for a movie or tv Show...." />
+            <button className="px-[20px] py-[5px] md:py-[18px] w-[100px] md:w-[150px] text-white rounded-r-[30px] bg-gradient-to-r from-orange-400 to-pink-600 shadow-md">Search</button>
+        </div>
           </div>
          </div>
         </div>
