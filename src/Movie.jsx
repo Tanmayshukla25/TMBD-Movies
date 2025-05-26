@@ -14,7 +14,7 @@ function Movie() {
   return (
     <>
       <div
-        className="w-full h-[100vh] bg-center bg-no-repeat bg-cover opacity-8 relative"
+        className="w-full h-[80vh] md:h-[100vh] bg-center bg-no-repeat bg-cover opacity-8 relative"
         style={{
           backgroundImage: `url(${baseImageUrl}${item.backdrop_path})`,
         }}
