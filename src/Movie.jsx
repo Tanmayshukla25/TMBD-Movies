@@ -19,7 +19,7 @@ function Movie() {
           backgroundImage: `url(${baseImageUrl}${item.backdrop_path})`,
         }}
       ></div>
-      <div className=" absolute top-1 md:top-3 left-0.5 md:left-[200px]">
+      <div className=" absolute top-0 md:top-3 left-0.5 md:left-[200px]">
         <div className="p-4 text-white flex justify-center items-center my-2  gap-[20px] md:gap-[150px] h-[100vh]">
           <div>
             <img
