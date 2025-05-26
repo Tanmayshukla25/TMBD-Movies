@@ -19,8 +19,8 @@ function Movie() {
           backgroundImage: `url(${baseImageUrl}${item.backdrop_path})`,
         }}
       ></div>
-      <div className=" absolute top-3 left-[200px]">
-        <div className="p-4 text-white flex justify-center items-center my-2  gap-[150px] h-[100vh]">
+      <div className=" absolute top-3 left-0.5 md:left-[200px]">
+        <div className="p-4 text-white flex justify-center items-center my-2  gap-[20px] md:gap-[150px] h-[100vh]">
           <div>
             <img
               src={`${baseImageUrl}${item.poster_path}`}
@@ -29,26 +29,26 @@ function Movie() {
             />
           </div>
           <div>
-            <h1 className="text-2xl font-bold mt-4">
+            <h1 className="text-[10px] md:text-2xl font-bold mt-2 md:mt-4">
               {item.title || item.name}
             </h1>
 
             <p>{item.subtitle}</p>
-            <p className="mt-2  w-[500px] py-4">
-              <span className="text-4xl font-bold pb-[20px]">OverView :-</span>{" "}
+            <p className="md:mt-2 text-[10px] md:text-xl w-[200px] md:w-[500px] py-4">
+              <span className="text-[10px] md:text-4xl font-bold pb-[20px]">OverView :-</span>{" "}
               <br />
               {item.overview}
             </p>
-            <span className="text-xl font-bold">
+            <span className="md:text-xl text-[10px] font-bold">
               Release Date :-{" "}
-              <span className="text-gray-500 text-[15px] font-medium mr-6">
+              <span className="text-gray-500 text-[10px] md:text-[15px] font-medium mr-6">
                 {" "}
                 {item.release_date}
               </span>
             </span>
-            <span className="text-xl font-bold">
+            <span className="md:text-xl text-[10px] font-bold">
               Rating :-{" "}
-              <span className="text-gray-500 text-[15px] font-medium">
+              <span className="text-gray-500 text-[10px] md:text-[15px]  font-medium">
                 {" "}
                 {item.vote_average}
               </span>
