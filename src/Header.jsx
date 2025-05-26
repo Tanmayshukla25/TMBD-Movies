@@ -40,7 +40,7 @@ function Header() {
       {randomBackdrop && (
         
         <div
-         className="w-full h-[50vh] md:h-[100vh] bg-center bg-no-repeat bg-cover  "
+         className="w-full h-[100vh] bg-center bg-no-repeat bg-cover  "
           style={{
             backgroundImage: `url(${baseImageUrl}${randomBackdrop.backdrop_path})`,
             
