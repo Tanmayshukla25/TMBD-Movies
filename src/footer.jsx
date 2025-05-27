@@ -23,10 +23,10 @@ function Footer() {
             </div>
 
             <div  className="flex text-center items-center justify-center gap-4 text-[20px] md:text-3xl ">
-                <span className="bg-cyan-900 p-3 rounded-[50%]"><FaFacebookF /></span>
-                <span className="bg-cyan-900 p-3 rounded-[50%]"><FaInstagram /></span>
-                <span className="bg-cyan-900 p-3 rounded-[50%]"><FaTwitter /></span>
-                <span className="bg-cyan-900 p-3 rounded-[50%]"><FaLinkedin /></span>
+                <span className="bg-cyan-900 p-3 rounded-[50%] hover:bg-blue-700"><FaFacebookF /></span>
+                <span className="bg-cyan-900 p-3 rounded-[50%] hover:bg-pink-700"><FaInstagram /></span>
+                <span className="bg-cyan-900 p-3 rounded-[50%] hover:bg-blue-500"><FaTwitter /></span>
+                <span className="bg-cyan-900 p-3 rounded-[50%] hover:bg-blue-800"><FaLinkedin /></span>
             </div>
         </div>
 
