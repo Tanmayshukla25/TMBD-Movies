@@ -53,7 +53,7 @@ useEffect(() => {
         }}
       ></div>
 
-      <div className="absolute top-0 md:top-3 left-0.5 md:left-[200px]">
+      <div className="absolute top-[-60px] md:top-3 left-0.5 md:left-[200px]">
         <div className="p-4 text-white flex justify-center items-center my-2 gap-[20px] md:gap-[150px] h-[100vh]">
           <div>
             <img
@@ -66,7 +66,7 @@ useEffect(() => {
                 target="_blank"
                 href={`https://www.youtube.com/watch?v=${videoId}`}
               >
-              <IoLogoYoutube className="text-5xl absolute left-[200px] md:left-[380px] bottom-[160px] md:bottom-[100px] text-red-500 bg-white backdrop-blur-md rounded-full px-1" />
+              <IoLogoYoutube className="text-5xl mt-3 text-red-500 bg-white backdrop-blur-md rounded-full px-1" />
 
               </a>
             )}
