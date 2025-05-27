@@ -1,6 +1,7 @@
 import { useState } from "react";
 import moviesLogo from "./images/movix-logo.svg";
 import { IoSearchSharp } from "react-icons/io5";
+
 function MainHeader() {
 
   const[ToggleBtn,SetToggle]=useState(false);
@@ -20,6 +21,7 @@ function MainHeader() {
           <div>
          <a href="">   <img
               src={moviesLogo}
+               target="_blank"
               alt="MoviesLogo"
               className="w-[100px] md:w-[180px] cursor-pointer"
             /></a>

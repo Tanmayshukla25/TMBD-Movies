@@ -1,49 +1,48 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import YouTube from "react-youtube";
+import { IoLogoYoutube } from "react-icons/io";
 
 const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
 function Movie() {
   const { state } = useLocation();
   const { item } = state || {};
+  
 
   const [videoId, setVideoId] = useState(null);
 
-  useEffect(() => {
-    const fetchYouTubeVideoId = async () => {
-      if (item?.id) {
-        try {
-          const response = await fetch(
-            `https://api.themoviedb.org/3/movie/${item.id}/videos?api_key=e951cf8f86b17a2c5ce148dcdbb62020`
-          );
-          const data = await response.json();
-          const youtubeTrailer = data.results.find(
-            (video) => video.site === "YouTube" && video.type === "Trailer"
-          );
-          if (youtubeTrailer?.key) {
-            setVideoId(youtubeTrailer.key);
-          }
-        } catch (error) {
-          console.error("Error fetching video:", error);
-        }
-      }
-    };
+useEffect(() => {
+  const fetchYouTubeVideoId = async () => {
+    if (item?.id) {
+      try {
+        const type = item.media_type === "tv" ? "tv" : "movie";
 
-    fetchYouTubeVideoId();
-  }, [item]);
+        const response = await fetch(
+          `https://api.themoviedb.org/3/${type}/${item.id}/videos?api_key=e951cf8f86b17a2c5ce148dcdbb62020`
+        );
+        const data = await response.json();
+        const youtubeTrailer = data.results.find(
+          (video) => video.site === "YouTube" && video.type === "Trailer"
+        );
+        if (youtubeTrailer?.key) {
+          setVideoId(youtubeTrailer.key);
+        }
+      } catch (error) {
+        console.error("Error fetching video:", error);
+      }
+    }
+  };
+
+  fetchYouTubeVideoId();
+}, [item]);
+
 
   if (!item) {
     return <p className="text-white">No movie data found.</p>;
   }
 
-  const opts = {
-    height: "390",
-    width: "640",
-    playerVars: {
-      autoplay: 1,
-    },
-  };
+
 
   return (
     <>
@@ -57,15 +56,18 @@ function Movie() {
       <div className="absolute top-0 md:top-3 left-0.5 md:left-[200px]">
         <div className="p-4 text-white flex justify-center items-center my-2 gap-[20px] md:gap-[150px] h-[100vh]">
           <div>
-            {!videoId && <YouTube videoId={videoId} opts={opts} />}
-
+            <img
+              src={`${baseImageUrl}${item.poster_path}`}
+              alt={item.title || item.name}
+              className="w-[350px] h-auto rounded-2xl shadow cursor-pointer mt-4"
+            />
             {videoId && (
-              <a href={`https://www.youtube.com/watch?v=${videoId}`}>
-                <img
-                  src={`${baseImageUrl}${item.poster_path}`}
-                  alt={item.title || item.name}
-                  className="w-[350px] h-auto rounded-2xl shadow cursor-pointer mt-4"
-                />
+              <a
+                target="_blank"
+                href={`https://www.youtube.com/watch?v=${videoId}`}
+              >
+              <IoLogoYoutube className="text-5xl absolute left-[200px] md:left-[380px] bottom-[160px] md:bottom-[100px] text-red-500 bg-white backdrop-blur-md rounded-full px-1" />
+
               </a>
             )}
           </div>
