@@ -41,7 +41,7 @@ function Row({ urls, heading, btn1, btn2 }) {
   }
 
   return (
-    <section className="px-8 mt-10 mb-10">
+    <section className="px-3 md:px-8 mt-10 mb-10">
       <header className="flex justify-between items-center my-2">
         <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
         <div className="bg-white  rounded-4xl py-1 px-1 md:px-3">
