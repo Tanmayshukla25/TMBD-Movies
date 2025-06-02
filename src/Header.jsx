@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 
 function Header() {
   const [movieData, setMovieData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchItems, setSearchItems] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [randomBackdrop, setRandomBackdrop] = useState(null);
 
@@ -39,15 +39,16 @@ function Header() {
 
 
   const handleSearch = async () => {
-    if (!searchQuery.trim()) {
+    if (!searchItems.trim()) {
       alert("Please enter a valid search query!");
-      
+    
       return;
     
+    
     }
-
+    setSearchItems("");
     try {
-      const response = await fetch(`${SEARCH_API}${searchQuery}`);
+      const response = await fetch(`${SEARCH_API}${searchItems}`);
       const result = await response.json();
       setSearchResults(result.results || []);
     } catch (error) {
@@ -73,9 +74,9 @@ function Header() {
               <input
                 type="text"
                 placeholder="Search for a movie..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                onKeyDown={(e) => e.key === "Enter" && handleSearch()}
+                value={searchItems}
+                onChange={(e) => setSearchItems(e.target.value)}
+              
                 className="w-[250px] md:w-[500px] px-4 md:py-4 py-2 rounded-l-full bg-white"
               />
               <button
