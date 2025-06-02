@@ -8,41 +8,45 @@ const baseImageUrl = "https://image.tmdb.org/t/p/original";
 function Movie() {
   const { state } = useLocation();
   const { item } = state || {};
-  
+
+
+  const [cast, setCast] = useState([]);
+
 
   const [videoId, setVideoId] = useState(null);
 
 useEffect(() => {
-  const fetchYouTubeVideoId = async () => {
+  const fetchMovieDetails = async () => {
     if (item?.id) {
       try {
         const type = item.media_type === "tv" ? "tv" : "movie";
 
         const response = await fetch(
-          `https://api.themoviedb.org/3/${type}/${item.id}/videos?api_key=e951cf8f86b17a2c5ce148dcdbb62020`
+          `https://api.themoviedb.org/3/${type}/${item.id}?api_key=e951cf8f86b17a2c5ce148dcdbb62020&append_to_response=videos,credits`
         );
         const data = await response.json();
-        const youtubeTrailer = data.results.find(
+
+        const youtubeTrailer = data.videos?.results?.find(
           (video) => video.site === "YouTube" && video.type === "Trailer"
         );
         if (youtubeTrailer?.key) {
           setVideoId(youtubeTrailer.key);
         }
+
+        setCast(data.credits?.cast);
       } catch (error) {
-        console.error("Error fetching video:", error);
+        console.error("Error fetching movie details:", error);
       }
     }
   };
 
-  fetchYouTubeVideoId();
+  fetchMovieDetails();
 }, [item]);
 
 
   if (!item) {
     return <p className="text-white">No movie data found.</p>;
   }
-
-
 
   return (
     <>
@@ -66,8 +70,7 @@ useEffect(() => {
                 target="_blank"
                 href={`https://www.youtube.com/watch?v=${videoId}`}
               >
-              <IoLogoYoutube className="text-5xl mt-3 text-red-500 bg-white backdrop-blur-md rounded-full px-1" />
-
+                <IoLogoYoutube className="text-5xl mt-3 text-red-500 bg-white backdrop-blur-md rounded-full px-1" />
               </a>
             )}
           </div>
@@ -96,7 +99,39 @@ useEffect(() => {
                 {item.vote_average}
               </span>
             </span>
+               <hr className="text-gray-500 mt-2.5 mb-2.5" />
+               <span className="text-2xl font-bold" >Popularity:- <span className="text-[20px] text-gray-500">{item.popularity}</span></span>
           </div>
+        </div>
+      </div>
+      <div className="px-3  mt-10 mb-10">
+        <div className="flex flex-wrap  items-center justify-center ">
+        
+          {cast.length > 0 && (
+            <div className=" py-8 px-4  overflow-x-scroll scrollbar-hide">
+              <h2 className="text-white text-3xl font-semibold mb-5">
+                Top Cast
+              </h2>
+              <div className="flex overflow-x-auto gap-6">
+                {cast.map((member) => (
+                  <div key={member.id} className="text-center min-w-[100px]">
+                    <img
+                      src={
+                        member.profile_path
+                          ? `https://image.tmdb.org/t/p/w185${member.profile_path}`
+                          : "https://via.placeholder.com/100x100?text=No+Image"
+                      }
+                      alt={member.name}
+                      className="w-28 h-28 object-cover rounded-full mx-auto"
+                    />
+                    <p className="text-white mt-2 text-sm font-semibold">
+                      {member.name}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </div>
     </>
