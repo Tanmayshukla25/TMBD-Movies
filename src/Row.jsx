@@ -83,7 +83,7 @@ function Row({ urls, heading, btn1, btn2 }) {
               <div className="content text-white">
                 <h3 className="font-semibold text-[10px] md:text-xl mb-2">
                   {trimContent(item.title || item.name)}
-                </h3>
+                </h3> 
                 <p className="text-[7px] md:text-xl">
                   {item.release_date
                     ? new Date(item.release_date).toLocaleDateString("en-US", {
