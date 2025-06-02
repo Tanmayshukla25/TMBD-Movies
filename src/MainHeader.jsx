@@ -25,7 +25,7 @@ function MainHeader() {
           <div>
             <Link to="/">
               <img
-                src="https://moviex-olive.vercel.app/assets/movix-logo-d720c325.svg"
+                src={moviesLogo}
                 alt="Movix Logo"
               />
             </Link>
@@ -52,9 +52,11 @@ function MainHeader() {
           {ToggleBtn && (
             <div className="bg-white p-2 w-full  text-black  md:hidden absolute top-13  text-center">
               <ul>
-                <li className="text-[18px] mb-1 p-1 rounded ">Movies</li>
+                <li className="text-[18px] mb-1 p-1 rounded "> <Link to="/SearchMovie" className={` cursor-pointer `}
+              onClick={() => handleClick(0)}>Movies</Link></li>
                 <hr className="text-gray-200" />
-                <li className="text-[18px] mb-1 p-1 rounded ">Tv Shows</li>
+                <li className="text-[18px] mb-1 p-1 rounded "> <Link to="/SearchTvShows" className={` cursor-pointer `}
+              onClick={() => handleClick(1)}>TvShows</Link></li>
               </ul>
             </div>
           )}

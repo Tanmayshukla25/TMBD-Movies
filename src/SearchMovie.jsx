@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const API_KEY = "3fb4c3ddfc88192745a5708f0de70cba";
 const BASE_URL = "https://api.themoviedb.org/3/movie/popular";
 const IMAGE_BASE = "https://image.tmdb.org/t/p/w500";
@@ -35,7 +36,7 @@ const SearchMovie = () => {
     const handleScroll = () => {
       if (
         window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 50 &&
+          document.body.offsetHeight - 100 &&
         !loading
       ) {
         setPage((prev) => prev + 1);
