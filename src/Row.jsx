@@ -6,14 +6,17 @@ function Row({ urls, heading, btn1, btn2 }) {
   const [showData, setShowData] = useState(urls[0]);
   const [activeBtn, setActiveBtn] = useState(0);
   
+//  console.log(movieData);
  
-  
+
+
   const navigate = useNavigate();
 
   const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
  function handleShowImage(item) {
   navigate(`/movie/${item.id}`, { state: { item } });
+   console.log(item)
 }
 
 
@@ -71,10 +74,14 @@ function Row({ urls, heading, btn1, btn2 }) {
       <div className="grid grid-flow-col gap-1 overflow-x-scroll   py-2 scrollbar-hide">
         {movieData.length > 0 ? (
           movieData.map((item) => (
+           
+            
             <div key={item.id} className="text-center">
+              
               {item.poster_path && (
                 <img
                   onClick={() => handleShowImage(item)} 
+                  
                   className="rounded-md mb-2 w-[200px] h-[100px] md:h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
                   src={`${baseImageUrl}${item.poster_path}`}
                   alt={item.title || item.name}

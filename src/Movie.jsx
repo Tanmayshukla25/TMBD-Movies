@@ -6,16 +6,18 @@ import "./App.css";
 
 const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
+
 function Movie() {
   const { state } = useLocation();
   const { item } = state || {};
 
   const [cast, setCast] = useState([]);
+  const [genres, setGenres] = useState([]);
 
   const [videoId, setVideoId] = useState(null);
 
   useEffect(() => {
-     window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
     const fetchMovieDetails = async () => {
       if (item?.id) {
         try {
@@ -25,6 +27,7 @@ function Movie() {
             `https://api.themoviedb.org/3/${type}/${item.id}?api_key=e951cf8f86b17a2c5ce148dcdbb62020&append_to_response=videos,credits`
           );
           const data = await response.json();
+          setGenres(data.genres || []);
 
           const youtubeTrailer = data.videos?.results?.find(
             (video) => video.site === "YouTube" && video.type === "Trailer"
@@ -42,7 +45,6 @@ function Movie() {
 
     fetchMovieDetails();
   }, [item]);
-  
 
   if (!item) {
     return <p className="text-white">No movie data found.</p>;
@@ -105,6 +107,21 @@ function Movie() {
                 {item.popularity}
               </span>
             </span>
+          
+            <hr className="text-gray-500 mt-2.5 mb-2.5" />
+            {genres.length > 0 && (
+              <div className="mt-4 flex flex-wrap gap-2 md:text-xl text-[10px] font-bold">
+                Genre:-{" "}
+                {genres.map((genre) => (
+                  
+                  <span className="text-xl font-bold"key={genre.id} >
+                    <span className="text-[15px]  text-gray-500">
+                   {genre.name} ,
+                    </span>
+                  </span>
+                ))}
+              </div>
+            )}
 
             {videoId && (
               <a
