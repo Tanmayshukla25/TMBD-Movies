@@ -4,7 +4,7 @@ import { IoSearchSharp } from "react-icons/io5";
 import { Link } from "react-router-dom";
 import { RxCross1 } from "react-icons/rx";
 
-function MainHeader({setIconsSearch,handleSearch}) {
+function MainHeader({ IconsSearch, setIconsSearch, handleSearch }) {
   const [ToggleBtn, setToggle] = useState(false);
   const [activeBtn, setActiveBtn] = useState();
 
@@ -92,15 +92,20 @@ function MainHeader({setIconsSearch,handleSearch}) {
             </div>
           )}
           {ToggleBtn && (
-            <div className="bg-white md:flex  hidden items-center   justify-center w-full absolute gap-[10px] top-15 text-black">
+            <div className="bg-white md:flex hidden items-center justify-center w-full absolute gap-[10px] top-15 text-black">
               <input
                 type="text"
-                placeholder="Search for a movie or tv show..."
-                className="text-2xl w-[65%]  p-2"
-                onChange={(e)=>setIconsSearch(e.target.value)}
-                
+                placeholder="Search for a movie or TV show..."
+                className="text-2xl w-[65%] m-1 p-2"
+                value={IconsSearch} 
+                onChange={(e) => setIconsSearch(e.target.value)}
               />
-              <button className="bg-blue-600 p-2 text-white rounded-xl" onClick={handleSearch}>Submit</button>
+              <button
+                className="bg-blue-600 p-2 text-white rounded-xl"
+                onClick={handleSearch}
+              >
+                Submit
+              </button>
               <RxCross1 onClick={ToggleData} />
             </div>
           )}

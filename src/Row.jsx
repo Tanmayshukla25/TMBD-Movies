@@ -2,41 +2,32 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Row({ urls, heading, btn1, btn2 }) {
-  const [movieData, setMovieData] = useState([]);
-  const [showData, setShowData] = useState(urls[0]);
+  const [allMovieData, setAllMovieData] = useState([]);
   const [activeBtn, setActiveBtn] = useState(0);
-  
-//  console.log(movieData);
- 
-
-
   const navigate = useNavigate();
-
   const baseImageUrl = "https://image.tmdb.org/t/p/original";
 
- function handleShowImage(item) {
-  navigate(`/movie/${item.id}`, { state: { item } });
-   console.log(item)
-}
-
-
   useEffect(() => {
-    async function fetchMovies() {
+    async function fetchAllMovies() {
       try {
-        const response = await fetch(showData);
-        const result = await response.json();
-        setMovieData(result.results || []);
+        const responses = await Promise.all(urls.map((url) => fetch(url)));
+        const results = await Promise.all(responses.map((res) => res.json()));
+        const data = results.map((result) => result.results || []);
+        setAllMovieData(data);
       } catch (error) {
         console.error("Error fetching movies:", error);
       }
     }
 
-    fetchMovies();
-  }, [showData]);
+    fetchAllMovies();
+  }, [urls]);
+
+  function handleShowImage(item) {
+    navigate(`/movie/${item.id}`, { state: { item } });
+  }
 
   const handleClick = (index) => {
     setActiveBtn(index);
-    setShowData(urls[index]);
   };
 
   function trimContent(content) {
@@ -47,22 +38,22 @@ function Row({ urls, heading, btn1, btn2 }) {
     <section className="px-3 md:px-8 mt-10 mb-10">
       <header className="flex justify-between items-center my-2">
         <h2 className="text-xl text-white font-bold mb-2">{heading}</h2>
-        <div className="bg-white  rounded-4xl py-1 px-1 md:px-3">
+        <div className="bg-white rounded-4xl py-1 px-1 md:px-3">
           <button
-            className={` rounded cursor-pointer mr-2  ${
+            className={`rounded cursor-pointer mr-2 ${
               activeBtn === 0
-                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-1 md:px-4 text-white "
-                : " "
+                ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-1 md:px-4 text-white"
+                : ""
             }`}
             onClick={() => handleClick(0)}
           >
             {btn1}
           </button>
           <button
-            className={` rounded cursor-pointer  ${
+            className={`rounded cursor-pointer ${
               activeBtn === 1
                 ? "bg-gradient-to-r from-orange-400 to-pink-600 shadow-md rounded-4xl px-1 md:px-4 text-white"
-                : " "
+                : ""
             }`}
             onClick={() => handleClick(1)}
           >
@@ -71,17 +62,13 @@ function Row({ urls, heading, btn1, btn2 }) {
         </div>
       </header>
 
-      <div className="grid grid-flow-col gap-1 overflow-x-scroll   py-2 scrollbar-hide">
-        {movieData.length > 0 ? (
-          movieData.map((item) => (
-           
-            
+      <div className="grid grid-flow-col gap-1 overflow-x-scroll py-2 scrollbar-hide">
+        {allMovieData[activeBtn]?.length > 0 ? (
+          allMovieData[activeBtn].map((item) => (
             <div key={item.id} className="text-center">
-              
               {item.poster_path && (
                 <img
-                  onClick={() => handleShowImage(item)} 
-                  
+                  onClick={() => handleShowImage(item)}
                   className="rounded-md mb-2 w-[200px] h-[100px] md:h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
                   src={`${baseImageUrl}${item.poster_path}`}
                   alt={item.title || item.name}
@@ -90,7 +77,7 @@ function Row({ urls, heading, btn1, btn2 }) {
               <div className="content text-white">
                 <h3 className="font-semibold text-[10px] md:text-xl mb-2">
                   {trimContent(item.title || item.name)}
-                </h3> 
+                </h3>
                 <p className="text-[7px] md:text-xl">
                   {item.release_date
                     ? new Date(item.release_date).toLocaleDateString("en-US", {

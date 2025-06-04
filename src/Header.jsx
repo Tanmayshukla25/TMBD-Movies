@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import MainHeader from "./MainHeader";
 
 function Header() {
   const [movieData, setMovieData] = useState([]);
-  const [searchItems, setSearchItems] = useState("");
-  const [IconsSearch, setIconsSearch] = useState("");
+  const [IconsSearch, setIconsSearch] = useState(""); 
   const [searchResults, setSearchResults] = useState([]);
   const [randomBackdrop, setRandomBackdrop] = useState(null);
 
@@ -15,7 +13,7 @@ function Header() {
     "https://api.themoviedb.org/3/search/movie?api_key=3fb4c3ddfc88192745a5708f0de70cba&query=";
   const UPCOMING_API =
     "https://api.themoviedb.org/3/movie/upcoming?api_key=3fb4c3ddfc88192745a5708f0de70cba&language=en-US&page=1";
-  const baseImageUrl = "https://image.tmdb.org/t/p/original";
+
   useEffect(() => {
     async function fetchMovies() {
       try {
@@ -52,11 +50,14 @@ function Header() {
       const response = await fetch(`${SEARCH_API}${IconsSearch}`);
       const result = await response.json();
       setSearchResults(result.results || []);
-      setSearchItems("");
+      setIconsSearch(""); 
     } catch (error) {
       console.error("Error searching for movies:", error);
     }
   };
+   function trimContent(content) {
+    return content.length > 20 ? content.slice(0, 20) + "..." : content;
+  }
 
   return (
     <div>
@@ -74,12 +75,14 @@ function Header() {
             <p className="text-white text-lg md:text-2xl text-center my-4">
               Millions of movies, TV shows, and people to discover. Explore now.
             </p>
+
+           
             <div className="flex justify-center mt-4">
               <input
                 type="text"
                 placeholder="Search for a movie..."
-                value={searchItems}
-                onChange={(e) => setSearchItems(e.target.value)}
+                value={IconsSearch}
+                onChange={(e) => setIconsSearch(e.target.value)}
                 className="w-[250px] md:w-[650px] px-4 md:py-4 py-2 rounded-l-full bg-white"
               />
               <button
@@ -92,8 +95,15 @@ function Header() {
           </div>
         </div>
       )}
-      <MainHeader setIconsSearch={setIconsSearch} handleSearch={handleSearch} />
 
+    
+      <MainHeader
+        IconsSearch={IconsSearch}
+        setIconsSearch={setIconsSearch}
+        handleSearch={handleSearch}
+      />
+
+     
       {searchResults.length > 0 && (
         <div className="">
           <h2 className="text-white text-2xl mb-4 text-center">
@@ -106,7 +116,7 @@ function Header() {
                   <img
                     onClick={() => handleShowImage(movie)}
                     className="rounded-md mb-2 w-[200px] h-[100px] md:h-[300px] object-cover shadow-[0px_0px_10px_rgba(0,0,0,0.3)] cursor-pointer"
-                    src={`${baseImageUrl}${movie.poster_path}`}
+                    src={`${IMAGE_BASE_URL}${movie.poster_path}`}
                     alt={movie.title || movie.name}
                   />
                 ) : (
@@ -114,7 +124,7 @@ function Header() {
                     <span>No Image</span>
                   </div>
                 )}
-                <p className="mt-2 text-center">{movie.title}</p>
+                <p className="mt-2 text-center"> {trimContent(movie.title )}</p>
               </div>
             ))}
           </div>

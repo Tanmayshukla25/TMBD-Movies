@@ -9,7 +9,7 @@ import MainHeader from "./MainHeader";
 function App() {
   return (
     <>
-    <MainHeader/>
+    
      <Header />
 
       <Row
